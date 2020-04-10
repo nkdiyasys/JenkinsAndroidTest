@@ -69,47 +69,7 @@ class MainActivityTest {
 
         // press the back button from details screen
         appCompatImageButton.perform(click())
-
-        // get the reference to2nd position item
-        val relativeLayout2 = onView(
-            allOf(
-                childAtPosition(
-                    allOf(
-                        withId(R.id.list),
-                        childAtPosition(
-                            withClassName(`is`("android.widget.RelativeLayout")),
-                            0
-                        )
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-
-        // click 2nd position item
-        relativeLayout2.perform(click())
-
-        // get reference to back button in details screen
-        val appCompatImageButton2 = onView(
-            allOf(
-                withContentDescription("Navigate up"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.toolbar),
-                        childAtPosition(
-                            withClassName(`is`("android.widget.LinearLayout")),
-                            0
-                        )
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-
-        // click back button from details screen
-        appCompatImageButton2.perform(click())
+        
     }
 
     private fun childAtPosition(
