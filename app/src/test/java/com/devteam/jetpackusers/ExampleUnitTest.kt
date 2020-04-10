@@ -1,5 +1,6 @@
 package com.devteam.jetpackusers
 
+import com.devteam.jetpackusers.utils.EmailValidator
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -19,5 +20,10 @@ class ExampleUnitTest {
     fun multiplication_isCorrect() {
         assertEquals(10, 2 * 5)
     }
-    
+
+    @Test
+    fun emailValidator_isCorrectEmailId() {
+        assertEquals(true, EmailValidator.isValidEmail("test@gmail.com"))
+    }
+
 }
