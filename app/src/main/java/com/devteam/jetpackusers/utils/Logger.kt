@@ -32,4 +32,8 @@ object Logger {
     private fun log(msg: String) {
         if (DEBUG) Log.d(TAG, msg)
     }
+
+    private fun testMethod() {
+        // Added by KP
+    }
 }
