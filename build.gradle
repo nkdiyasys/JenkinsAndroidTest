@@ -31,7 +31,8 @@ allprojects {
         
     }
 
-    buildDir = "../builds/"
+    // lets not change the build folder
+    //buildDir = "../builds/"
 }
 
 task clean(type: Delete) {
