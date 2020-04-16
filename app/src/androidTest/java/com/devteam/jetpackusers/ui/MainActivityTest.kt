@@ -1,6 +1,7 @@
 package com.devteam.jetpackusers.ui
 
 
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
@@ -15,9 +16,11 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -27,6 +30,11 @@ class MainActivityTest {
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
+    @Before
+    fun before() {
+        mActivityTestRule.activity.sendBroadcast(Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
+    }
+
     @Test
     fun mainActivityTest() {
         // get reference to 0th position item
@@ -34,7 +42,7 @@ class MainActivityTest {
             allOf(
                 childAtPosition(
                     allOf(
-                        withId(R.id.list),
+                        withId(com.devteam.jetpackusers.R.id.list),
                         childAtPosition(
                             withClassName(`is`("android.widget.RelativeLayout")),
                             0
@@ -69,7 +77,7 @@ class MainActivityTest {
 
         // press the back button from details screen
         appCompatImageButton.perform(click())
-        
+
     }
 
     private fun childAtPosition(
