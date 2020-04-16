@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+    apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
@@ -9,8 +9,20 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'kotlin-kapt'
 
 android {
+    // THIS PROVIDES THE KEYSTORE STORE DETAILS
+    // THIS IS USED WITH JENKINS TO AUTOMATICALLY SIGN THE APK
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword 'admin123'
+            storeFile file('../new.keystore')
+            storePassword 'admin123'
+        }
+    }
+
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+
     defaultConfig {
         applicationId "com.devteam.jetpackusers"
         minSdkVersion 22
@@ -18,7 +30,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -35,6 +49,21 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    // THIS WILL CREATE THE APK WITH 'DATE-VERSIONNAME-RELEASE.APK' NAME
+    // THIS IS REQUIRED FOR JENKINS BUILD PURPOSE
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def formattedDate = new Date().format('ddMMMYYYYHHmmss')
+            outputFileName = "${formattedDate}-${variant.versionName}-release.apk"
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 

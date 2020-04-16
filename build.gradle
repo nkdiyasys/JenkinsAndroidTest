@@ -30,6 +30,8 @@ allprojects {
         jcenter()
         
     }
+
+    buildDir = "../builds/"
 }
 
 task clean(type: Delete) {
